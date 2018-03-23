@@ -9,7 +9,7 @@ var axios = require("axios");
 
 var db=require("./models");
 
-var PORT = 4000;
+var PORT = process.env.PORT||4000;
 // If deployed, use the deployed database. Otherwise use the local mongoHeadlines database
 var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
 
@@ -26,9 +26,10 @@ var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines
 // Set mongoose to leverage built in JavaScript ES6 Promises
 // Connect to the Mongo DB
 mongoose.Promise = Promise;
-mongoose.connect(MONGODB_URI,{
-  useMongoClient: true
-});
+mongoose.connect(MONGODB_URI
+  // ,{
+  // useMongoClient: true}
+  );
 
 app.get("/clearall", function(req, res) {
     db.Article.remove(
