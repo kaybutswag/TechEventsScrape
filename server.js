@@ -22,7 +22,9 @@ app.use(express.static("public"));
 // Set mongoose to leverage built in JavaScript ES6 Promises
 // Connect to the Mongo DB
 mongoose.Promise = Promise;
-mongoose.connect(MONGODB_URI);
+mongoose.connect(MONGODB_URI),{
+useMongoClient: true
+};
 
 app.get("/clearall", function(req, res) {
     db.Article.remove(
